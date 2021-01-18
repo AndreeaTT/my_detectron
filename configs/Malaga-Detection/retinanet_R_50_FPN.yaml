@@ -1,0 +1,12 @@
+_BASE_: "../Base-RetinaNet.yaml"
+MODEL:
+  RESNETS:
+    DEPTH: 50
+  RETINANET:
+    NUM_CLASSES: 7
+DATASETS:
+  TRAIN: ('Malaga_train', 'Malaga_val')
+  TEST: ('Malaga_test',)
+SOLVER:
+  STEPS: (49020, 65360)
+  MAX_ITER: 73530  # 90 epochs
