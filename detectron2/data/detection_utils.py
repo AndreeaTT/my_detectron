@@ -162,6 +162,12 @@ def transform_instance_annotations(
     # Note that bbox is 1d (per-instance bounding box)
     annotation["bbox"] = transforms.apply_box([bbox])[0]
     annotation["bbox_mode"] = BoxMode.XYXY_ABS
+    class_id = annotation["category_id"]
+    if class_id==1 or class_id==3:
+        class_id+=1
+    elif class_id ==2 or class_id==4:
+        class_id-=1
+    annotation["category_id"] = class_id
 
     if "segmentation" in annotation:
         # each instance contains 1 or more polygons

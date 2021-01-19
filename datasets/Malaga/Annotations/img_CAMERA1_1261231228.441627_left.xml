@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Backup</folder>
+	<filename>img_CAMERA1_1261231228.441627_left.jpg</filename>
+	<path>D:\Facultate\Anul4\Licenta\Cod\ModelDetectie\Dataset\Backup\img_CAMERA1_1261231228.441627_left.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>800</width>
+		<height>600</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>RIGHT</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>698</xmin>
+			<ymin>419</ymin>
+			<xmax>728</xmax>
+			<ymax>429</ymax>
+		</bndbox>
+	</object>
+</annotation>

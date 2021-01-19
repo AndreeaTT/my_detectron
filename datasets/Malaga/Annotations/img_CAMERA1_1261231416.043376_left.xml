@@ -1,0 +1,26 @@
+<annotation>
+	<folder>malaga-urban-dataset_rectified_a=0_800x600_Images</folder>
+	<filename>img_CAMERA1_1261231416.043376_left.jpg</filename>
+	<path>D:\Facultate\Anul4\Licenta\Cod\ModelDetectie\Dataset\malaga-urban-dataset_rectified_800x600\malaga-urban-dataset_rectified_a=0_800x600_Images\img_CAMERA1_1261231416.043376_left.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>800</width>
+		<height>600</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>LEFT_RIGHT</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>435</xmin>
+			<ymin>418</ymin>
+			<xmax>474</xmax>
+			<ymax>430</ymax>
+		</bndbox>
+	</object>
+</annotation>
