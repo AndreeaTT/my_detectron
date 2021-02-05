@@ -59,6 +59,7 @@ def read_image(file_name, format=None):
                 conversion_format = "RGB"
             image = image.convert(conversion_format)
         image = np.asarray(image)
+        image = image[200:, :]
         if format == "BGR":
             # flip channels if needed
             image = image[:, :, ::-1]
@@ -163,12 +164,15 @@ def transform_instance_annotations(
     annotation["bbox"] = transforms.apply_box([bbox])[0]
     annotation["bbox_mode"] = BoxMode.XYXY_ABS
     class_id = annotation["category_id"]
-    if class_id==1 or class_id==3:
-        class_id+=1
-    elif class_id ==2 or class_id==4:
-        class_id-=1
-    annotation["category_id"] = class_id
+    bbox1 = BoxMode.convert(annotation["bbox"], annotation["bbox_mode"], BoxMode.XYXY_ABS)
 
+    if image_size[1] - bbox[0] == bbox1[2] and image_size[1] - bbox[2] == bbox1[0]:
+        if class_id==1 or class_id==3:
+            class_id+=1
+        elif class_id ==2 or class_id==4:
+            class_id-=1
+        annotation["category_id"] = class_id
+    
     if "segmentation" in annotation:
         # each instance contains 1 or more polygons
         polygons = [np.asarray(p).reshape(-1, 2) for p in annotation["segmentation"]]
@@ -414,7 +418,7 @@ def build_transform_gen(cfg, is_train):
 
     logger = logging.getLogger(__name__)
     tfm_gens = []
-    tfm_gens.append(T.ResizeShortestEdge(min_size, max_size, sample_style))
+    '''tfm_gens.append(T.ResizeShortestEdge(min_size, max_size, sample_style))'''
     if is_train:
         tfm_gens.append(T.RandomFlip())
         logger.info("TransformGens used in training: " + str(tfm_gens))

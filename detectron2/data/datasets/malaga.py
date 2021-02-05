@@ -45,7 +45,7 @@ def load_malaga_instances(dirname: str, split: str):
         r = {
             "file_name": jpeg_file,
             "image_id": fileid,
-            "height": int(tree.findall("./size/height")[0].text),
+            "height": int(tree.findall("./size/height")[0].text)-200,
             "width": int(tree.findall("./size/width")[0].text),
         }
         instances = []
@@ -64,7 +64,8 @@ def load_malaga_instances(dirname: str, split: str):
             # a box with annotation (xmin=1, xmax=W) covers the whole image.
             # In coordinate space this is represented by (xmin=0, xmax=W)
             bbox[0] -= 1.0
-            bbox[1] -= 1.0
+            bbox[1] -= 201
+            bbox[3] -= 200
             instances.append(
                 {"category_id": CLASS_NAMES.index(cls), "bbox": bbox, "bbox_mode": BoxMode.XYXY_ABS}
             )
