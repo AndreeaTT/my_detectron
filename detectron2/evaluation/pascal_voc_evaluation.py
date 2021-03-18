@@ -15,7 +15,6 @@ from detectron2.utils import comm
 
 from .evaluator import DatasetEvaluator
 
-
 class PascalVOCDetectionEvaluator(DatasetEvaluator):
     """
     Evaluate Pascal VOC AP.
@@ -86,6 +85,8 @@ class PascalVOCDetectionEvaluator(DatasetEvaluator):
 
             aps = defaultdict(list)  # iou -> ap per class
             for cls_id, cls_name in enumerate(self._class_names):
+                if cls_id > 4:
+                    break
                 lines = predictions.get(cls_id, [""])
 
                 with open(res_file_template.format(cls_name), "w") as f:
@@ -103,6 +104,7 @@ class PascalVOCDetectionEvaluator(DatasetEvaluator):
                     aps[thresh].append(ap * 100)
 
         ret = OrderedDict()
+        print(aps.items())
         mAP = {iou: np.mean(x) for iou, x in aps.items()}
         ret["bbox"] = {"AP": np.mean(list(mAP.values())), "AP50": mAP[50], "AP75": mAP[75]}
         return ret
@@ -135,9 +137,9 @@ def parse_rec(filename):
         bbox = obj.find("bndbox")
         obj_struct["bbox"] = [
             int(bbox.find("xmin").text),
-            int(bbox.find("ymin").text),
+            int(bbox.find("ymin").text)-200,
             int(bbox.find("xmax").text),
-            int(bbox.find("ymax").text),
+            int(bbox.find("ymax").text)-200,
         ]
         objects.append(obj_struct)
 
